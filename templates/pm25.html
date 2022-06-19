@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PM2.5全台資訊</title>
+    <style>
+      .date {
+        background-color: navy;
+        color: white;
+        display: 6px;
+        border-radius: 6px;
+      }
+      body {
+        background-color: #eddfb3;
+      }
+      #container {
+        width: 80%;
+        margin: 16px auto;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        margin: 0px auto;
+      }
+      th {
+        background-color: #a0d995;
+        font-size: 20px;
+      }
+      td {
+        background-color: #4cacbc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>PM2.5全台資訊</h1>
+      <a href="/">回首頁</a>
+      <p class="date">目前時間：{{today}}</p>
+      {%if values%}
+      <table border="1">
+        <thead>
+          <tr>
+            {%for column in columns%}
+            <th>{{column}}</th>
+            {%endfor%}
+          </tr>
+        </thead>
+        <tbody>
+          {%for value in values%}
+          <tr>
+            {%for data in value%}
+            <td>{{data}}</td>
+            {%endfor%}
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+      {%else%}
+      <h2>資料讀取失敗</h2>
+      {%endif%}
+    </div>
+  </body>
+</html>

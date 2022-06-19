@@ -4,17 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      .result {
-        background-color: black;
-        color: white;
-      }
-    </style>
+    <title>首頁</title>
   </head>
   <body>
-    <h1>計算結果</h1>
-    x={{result["x"]}} y={{result["y"]}} total=
-    <span class="result">{{result["total"]}}</span>
+    <p>{{today}}</p>
+    <h1>Welcome,{{name}}</h1>
+
+    <a href="/stock">股市資訊</a><br />
+    <a href="/pm25">PM2.5 全台資訊</a>
   </body>
 </html>

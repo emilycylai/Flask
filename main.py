@@ -1,17 +1,29 @@
 #import flask
 from datetime import datetime
 from flask import Flask, render_template
+from pm25 import get_pm25
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return "<h1>Hello World!</h1>"
+@app.route('/<name>')
+def index(name='GUEST'):
+    today = getToday()
+    # return "<h1>Hello World!</h1>"
+    return render_template('./index.html', today=today, name=name)
+
+
+@app.route('/pm25')
+def pm25():
+    today = getToday()
+    columns, values = get_pm25()
+    return render_template('./pm25.html', **locals())
 
 
 @app.route('/stock')
 def stock():
+    today = getToday()
     stocks = [
         {'分類': '日經指數', '指數': '22,920.30'},
         {'分類': '韓國綜合', '指數': '2,304.59'},
@@ -20,7 +32,7 @@ def stock():
     ]
     for stock in stocks:
         print(stock['分類'], stock['指數'])
-    return render_template('./stocks.html', stocks=stocks)
+    return render_template('./stocks.html', **locals())
 
 
 @app.route('/sum/x=<x>&y=<y>')
@@ -44,9 +56,10 @@ def get_sum(x, y):
 @app.route('/today/<name>')
 def getToday(name='GUEST'):
     today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    return f'<h1>Hello {name}. Welcome!</h1><br>{today}'
+    # return f'<h1>Hello {name}. Welcome!</h1><br>{today}'
+    return today
 
 
 if __name__ == '__main__':  # 以防外面引用，希望只給本地端使用
-    getToday('Emily')
+    # getToday('Emily')
     app.run(debug=True)
