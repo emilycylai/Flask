@@ -1,7 +1,8 @@
 #import flask
 from datetime import datetime
-from flask import Flask, render_template
-from pm25 import get_pm25
+from flask import Flask, render_template, request
+#from pm25 import get_pm25
+from scrape.pm25 import get_pm25
 
 app = Flask(__name__)
 
@@ -14,9 +15,20 @@ def index(name='GUEST'):
     return render_template('./index.html', today=today, name=name)
 
 
-@app.route('/pm25/<sort>')
-@app.route('/pm25')
-def pm25(sort=None):
+@app.route('/pm25', methods=['GET', 'POST'])  # 預設為GET
+def pm25():
+    sort = False
+
+    if (request.method == 'POST'):
+        # print('POST')
+        if request.form.get('sort'):
+            sort = True
+            # print('SORT')
+
+        # if request.form.get('update'):#因為上面已有sort=False宣告
+            # sort=False
+            # print('UPDATE')
+
     today = getToday()
     columns, values = get_pm25(sort)
     return render_template('./pm25.html', **locals())
