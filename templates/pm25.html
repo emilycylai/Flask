@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PM2.5全台資訊</title>
     <!-- <link rel="stylesheet" href="../static/pm25.css"> -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static',filename='./css/pm25.css')}}">
   </head>
@@ -43,20 +42,20 @@
       {%endif%}
     </div>
     <script>
-      const h1El=document.querySelector("h1");
-      h1El.innerText="Hello Flask";
+      //const h1El=document.querySelector("h1");
+      //h1El.innerText="Hello Flask";
 
-      const sortEl=document.querySelector("#sort");
-      sortEl.addEventListener("click",()=>{
-        alert("sorting......");
-      });
+      //const sortEl=document.querySelector("#sort");
+      //sortEl.addEventListener("click",()=>{
+        //alert("sorting......");
+      //});
 
-      $("h1").text("Hello JQuery");
-      $("h1").html("<u>Hello JQuery</u>");
-      $(".date").css("color","gold");
-      $("#sort").click(()=>{
-        alert("sorting......2");
-      });
+      //$("h1").text("Hello JQuery");
+      //$("h1").html("<u>Hello JQuery</u>");
+      //$(".date").css("color","gold");
+      //$("#sort").click(()=>{
+        //alert("sorting......2");
+      //});
     </script>
   </body>
 </html>
