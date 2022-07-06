@@ -45,6 +45,20 @@ function drawChart_2(data2){
             text: '特性示例：渐变色 阴影 点击缩放',
             subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
         },
+        toolbox:{
+            shou:true,
+            orient:'vertical',
+            left:'left',
+            top:'center',
+            feature:{
+                magictype:{ show: true, type: ['line','bar','tiled']},
+                restore:{show: true},
+                saveAsImage:{show: true}
+            }
+        },
+        tooltip:{
+            trigger: 'axis'
+        },
         xAxis: {
             data: dataAxis,
             axisLabel: {
