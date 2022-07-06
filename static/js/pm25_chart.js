@@ -131,7 +131,7 @@ function drawChart_1(data){
             left:'left',
             top:'center',
             feature:{
-                magictype:{ show: true, type: ['line','bar','tiled']},
+                magicType:{ show: true, type: ['line','bar','tiled']},
                 restore:{show: true},
                 saveAsImage:{show: true}
             }
