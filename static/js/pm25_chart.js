@@ -126,7 +126,7 @@ function drawChart_1(data){
             text: "PM2.5 數據圖",
         },
         toolbox:{
-            shou:true,
+            show:true,
             orient:'vertical',
             left:'left',
             top:'center',
