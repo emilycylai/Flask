@@ -44,7 +44,7 @@ def pm25_json():
 @app.route('/pm25-chart')
 def pm25_chart():
     citys = get_all_city()
-    return render_template('./pm25-chart-bulma.html', countys=citys)
+    return render_template('./pm25-charts-bulma.html', countys=citys)
 
 
 @app.route('/pm25', methods=['GET', 'POST'])  # 預設為GET
