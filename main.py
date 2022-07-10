@@ -1,7 +1,8 @@
 from datetime import datetime
 from flask import Flask, render_template, request
-from scrape.pm25 import get_pm25
+from scrape.pm25 import get_pm25, get_six_pm25, get_all_city, get_city_pm25
 import json
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -14,6 +15,18 @@ def index(name='GUEST'):
     return render_template('./index.html', today=today, name=name)
 
 
+@app.route('/city-pm25/<city>', methods=['GET'])
+def pm25_city_json(city):
+    stationName, result = get_city_pm25(city)
+    return json.dumps({'stationName': stationName, 'result': result}, ensure_ascii=False)
+
+
+@app.route('/six-pm25-json', methods=['POST'])
+def pm25_six_json():
+    six_cities, result = get_six_pm25()
+    return json.dumps({'citys': six_cities, 'result': result}, ensure_ascii=False)
+
+
 @app.route('/pm25-json', methods=['GET', 'POST'])
 def pm25_json():
     columns, values = get_pm25(False)
@@ -21,7 +34,7 @@ def pm25_json():
     stationName = [value[1] for value in values]
     result = [value[2] for value in values]
 
-    data = {'stationName': stationName, 'result': result}
+    data = {'date': getToday(), 'stationName': stationName, 'result': result}
     return json.dumps(data, ensure_ascii=False)
 
     # for value in values:
@@ -30,7 +43,8 @@ def pm25_json():
 
 @app.route('/pm25-chart')
 def pm25_chart():
-    return render_template('./pm25-chart.html')
+    citys = get_all_city()
+    return render_template('./pm25-chart-bulma.html', countys=citys)
 
 
 @app.route('/pm25', methods=['GET', 'POST'])  # 預設為GET
@@ -85,7 +99,7 @@ def get_sum(x, y):
 
 @app.route('/today')
 @app.route('/today/<name>')
-def getToday(name='GUEST'):
+def getToday():
     today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # return f'<h1>Hello {name}. Welcome!</h1><br>{today}'
     return today
